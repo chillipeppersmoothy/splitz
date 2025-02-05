@@ -22,11 +22,19 @@ export default function LandingPage() {
     <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-4xl p-8 flex flex-col md:flex-row gap-8">
         <div className="flex-1 space-y-6">
-          <div className="space-y-2">
-            <h1 className="text-4xl font-bold text-gray-800">Splitz</h1>
-            <p className="text-gray-600">
-              Split expenses effortlessly with friends
-            </p>
+          <div className="flex gap-2">
+            <img
+              src="./splitz.png"
+              width="70px"
+              height="60px"
+              className="rounded-full"
+            />
+            <div className="space-y-2">
+              <h1 className="text-4xl font-bold text-gray-800">Splitz</h1>
+              <p className="text-gray-600">
+                Split expenses effortlessly with friends
+              </p>
+            </div>
           </div>
 
           <div className="space-y-4">
