@@ -6,12 +6,29 @@ import UserBalances from "../components/UserBalances";
 import CurrentExpensePreview from "../components/CurrentExpensePreview";
 import ExpenseHistory from "../components/ExpenseHistory";
 import AddExpense from "../components/AddExpense";
+import { Expense } from "../Interfaces/Interface";
 
 export default function ExpensePage() {
   const { expenses } = useSplitz();
   const navigate = useNavigate();
   const [amount, setAmount] = useState("");
   const [selectedNames, setSelectedNames] = useState<string[]>([]);
+  const [item, setItem] = useState("");
+  const [editingExpenseId, setEditingExpenseId] = useState<string | null>(null);
+
+  const handleEditExpense = (expense: Expense) => {
+    setItem(expense.item);
+    setAmount(expense.amount.toString());
+    setSelectedNames(expense.splitBetween);
+    setEditingExpenseId(expense.id);
+  };
+
+  const handleCancelEdit = () => {
+    setItem("");
+    setAmount("");
+    setSelectedNames([]);
+    setEditingExpenseId(null);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-500 p-4">
@@ -24,9 +41,13 @@ export default function ExpensePage() {
             setAmount={setAmount}
             selectedNames={selectedNames}
             setSelectedNames={setSelectedNames}
+            item={item}
+            setItem={setItem}
+            editingExpenseId={editingExpenseId}
+            onCancelEdit={handleCancelEdit}
           />
 
-          <ExpenseHistory />
+          <ExpenseHistory onEditExpense={handleEditExpense} />
         </div>
 
         {(amount || selectedNames.length > 0) && (

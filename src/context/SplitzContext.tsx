@@ -17,6 +17,18 @@ export function SplitzProvider({ children }: { children: React.ReactNode }) {
     setExpenses([...expenses, newExpense]);
   };
 
+  const deleteExpense = (id: string) => {
+    setExpenses(expenses.filter((expense) => expense.id !== id));
+  };
+
+  const editExpense = (id: string, updatedExpense: Omit<Expense, "id">) => {
+    setExpenses(
+      expenses.map((expense) =>
+        expense.id === id ? { ...updatedExpense, id } : expense
+      )
+    );
+  };
+
   const getTotalPerPerson = () => {
     const totals: Record<string, number> = {};
     names.forEach((name) => (totals[name] = 0));
@@ -33,7 +45,15 @@ export function SplitzProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <SplitzContext.Provider
-      value={{ names, setNames, expenses, addExpense, getTotalPerPerson }}
+      value={{
+        names,
+        setNames,
+        expenses,
+        addExpense,
+        deleteExpense,
+        editExpense,
+        getTotalPerPerson,
+      }}
     >
       {children}
     </SplitzContext.Provider>

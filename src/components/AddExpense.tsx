@@ -1,5 +1,5 @@
-import { IndianRupee, Plus, Receipt, Users } from "lucide-react";
-import { useRef, useState } from "react";
+import { IndianRupee, Plus, Receipt, Users, X } from "lucide-react";
+import { useRef } from "react";
 import { useSplitz } from "../context/useSplitz";
 
 interface AddExpenseProps {
@@ -7,6 +7,10 @@ interface AddExpenseProps {
   setAmount: React.Dispatch<React.SetStateAction<string>>;
   selectedNames: string[];
   setSelectedNames: React.Dispatch<React.SetStateAction<string[]>>;
+  item: string;
+  setItem: React.Dispatch<React.SetStateAction<string>>;
+  editingExpenseId: string | null;
+  onCancelEdit: () => void;
 }
 
 const AddExpense = ({
@@ -14,18 +18,29 @@ const AddExpense = ({
   setAmount,
   selectedNames,
   setSelectedNames,
+  item,
+  setItem,
+  editingExpenseId,
+  onCancelEdit,
 }: AddExpenseProps) => {
-  const [item, setItem] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
-  const { names, addExpense } = useSplitz();
+  const { names, addExpense, editExpense } = useSplitz();
 
-  const handleAddExpense = () => {
+  const handleAddOrUpdateExpense = () => {
     if (item && amount && selectedNames.length > 0) {
-      addExpense({
+      const expenseData = {
         item,
         amount: parseFloat(amount),
         splitBetween: selectedNames,
-      });
+      };
+
+      if (editingExpenseId) {
+        editExpense(editingExpenseId, expenseData);
+        onCancelEdit();
+      } else {
+        addExpense(expenseData);
+      }
+
       setItem("");
       setAmount("");
       setSelectedNames([]);
@@ -46,7 +61,19 @@ const AddExpense = ({
   return (
     <div className="bg-white rounded-2xl shadow-xl p-6 space-y-6">
       <div className="space-y-4">
-        <h2 className="text-2xl font-bold text-gray-800">Add Expenses</h2>
+        <div className="flex justify-between items-center">
+          <h2 className="text-2xl font-bold text-gray-800">
+            {editingExpenseId ? "Edit Expense" : "Add Expense"}
+          </h2>
+          {editingExpenseId && (
+            <button
+              onClick={onCancelEdit}
+              className="p-1.5 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          )}
+        </div>
         <div className="space-y-4">
           <input
             ref={inputRef}
@@ -70,12 +97,12 @@ const AddExpense = ({
           </div>
           <div className="flex gap-2">
             <button
-              onClick={handleAddExpense}
+              onClick={handleAddOrUpdateExpense}
               disabled={!item || !amount || selectedNames.length === 0}
               className="flex-1 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
             >
               <Plus className="w-5 h-5 inline mr-2" />
-              Add Expense
+              {editingExpenseId ? "Update Expense" : "Add Expense"}
             </button>
             <button
               onClick={selectAll}

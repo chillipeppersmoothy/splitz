@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, IndianRupee } from "lucide-react";
 import { useSplitz } from "../context/useSplitz";
+import { getInitials, getRandomColor } from "../utils/utils";
 
 export default function SummaryPage() {
   const { getTotalPerPerson } = useSplitz();
@@ -23,14 +24,21 @@ export default function SummaryPage() {
 
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {Object.entries(totals).map(([name, amount]) => (
-              <div key={name} className="bg-gray-50 p-6 rounded-xl space-y-2">
-                <div className="flex items-center gap-2">
-                  <IndianRupee className="w-5 h-5 text-purple-600" />
+              <div key={name} className="bg-gray-50 p-6 rounded-xl space-y-4">
+                <div className="flex items-center gap-3">
+                  <div
+                    className={`w-12 h-12 rounded-full ${getRandomColor()} flex items-center justify-center text-white font-semibold text-lg`}
+                  >
+                    {getInitials(name)}
+                  </div>
                   <h3 className="font-semibold text-gray-700">{name}</h3>
                 </div>
-                <p className="text-2xl font-bold text-purple-600">
-                  ₹{amount.toFixed(2)}
-                </p>
+                <div className="flex items-center gap-2">
+                  <IndianRupee className="w-5 h-5 text-purple-600" />
+                  <p className="text-2xl font-bold text-purple-600">
+                    {amount.toFixed(2)}
+                  </p>
+                </div>
               </div>
             ))}
           </div>

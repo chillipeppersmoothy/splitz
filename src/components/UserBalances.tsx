@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { IndianRupee } from "lucide-react";
 import { useSplitz } from "../context/useSplitz";
+import { getInitials, getRandomColor } from "../utils/utils";
 
 const UserBalances = memo(function UserBalances() {
   const { names, getTotalPerPerson } = useSplitz();
@@ -22,8 +23,15 @@ const UserBalances = memo(function UserBalances() {
             className="bg-purple-50 p-4 rounded-lg"
             style={{ minHeight: "80px" }}
           >
-            <h4 className="font-semibold text-purple-700">{name}</h4>
-            <p className="text-2xl font-bold text-purple-600">
+            <div className="flex items-center gap-3">
+              <div
+                className={`w-10 h-10 rounded-full ${getRandomColor()} flex items-center justify-center text-white font-semibold`}
+              >
+                {getInitials(name)}
+              </div>
+              <h4 className="font-semibold text-purple-700">{name}</h4>
+            </div>
+            <p className="text-2xl font-bold text-purple-600 mt-2">
               <span aria-label="Indian Rupees">₹</span>
               {totals[name].toFixed(2)}
             </p>
