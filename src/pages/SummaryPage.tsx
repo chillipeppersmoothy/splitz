@@ -4,7 +4,7 @@ import { useSplitz } from "../context/useSplitz";
 import { getInitials, getRandomColor } from "../utils/utils";
 
 export default function SummaryPage() {
-  const { getTotalPerPerson } = useSplitz();
+  const { getTotalPerPerson, getTotal } = useSplitz();
   const navigate = useNavigate();
   const totals = getTotalPerPerson();
 
@@ -21,13 +21,32 @@ export default function SummaryPage() {
               <ArrowLeft className="w-6 h-6" />
             </button>
           </div>
+          <div
+            className="bg-purple-50 sm:p-6 p-5 rounded-lg space-y-4"
+            style={{ minHeight: "80px" }}
+          >
+            <div className="flex items-center gap-3">
+              <div
+                className={`sm:w-12 sm:h-12 w-8 h-8 text-xs sm:text-base rounded-full ${getRandomColor()} flex items-center justify-center text-white font-semibold`}
+              >
+                <IndianRupee className="w-5 h-5" aria-hidden="true" />
+              </div>
+              <h4 className="font-semibold text-purple-700 sm:text-2xl text-xl">
+                Total Expense
+              </h4>
+            </div>
+            <p className="text-2xl font-bold text-purple-600 mt-2">
+              <span aria-label="Indian Rupees">₹</span>
+              {getTotal().toFixed(2)}
+            </p>
+          </div>
 
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {Object.entries(totals).map(([name, amount]) => (
               <div key={name} className="bg-gray-50 p-6 rounded-xl space-y-4">
                 <div className="flex items-center gap-3">
                   <div
-                    className={`w-12 h-12 rounded-full ${getRandomColor()} flex items-center justify-center text-white font-semibold text-lg`}
+                    className={`sm:w-12 sm:h-12 w-8 h-8 rounded-full ${getRandomColor()} flex items-center justify-center text-white font-semibold text-lg`}
                   >
                     {getInitials(name)}
                   </div>

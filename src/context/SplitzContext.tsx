@@ -43,6 +43,10 @@ export function SplitzProvider({ children }: { children: React.ReactNode }) {
     return totals;
   };
 
+  const getTotal = () => {
+    return expenses.reduce((acc, cur) => acc + cur.amount, 0);
+  };
+
   return (
     <SplitzContext.Provider
       value={{
@@ -53,6 +57,7 @@ export function SplitzProvider({ children }: { children: React.ReactNode }) {
         deleteExpense,
         editExpense,
         getTotalPerPerson,
+        getTotal,
       }}
     >
       {children}

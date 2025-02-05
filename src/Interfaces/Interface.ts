@@ -13,4 +13,5 @@ export interface SplitzContextType {
   deleteExpense: (id: string) => void;
   editExpense: (id: string, expense: Omit<Expense, "id">) => void;
   getTotalPerPerson: () => Record<string, number>;
+  getTotal: () => number;
 }
