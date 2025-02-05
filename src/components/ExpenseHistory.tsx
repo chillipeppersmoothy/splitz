@@ -17,8 +17,8 @@ const ExpenseHistory = ({ onEditExpense }: ExpenseHistoryProps) => {
           <div key={expense.id} className="bg-gray-50 p-4 rounded-lg space-y-2">
             <div className="flex justify-between items-center">
               <div className="flex-1">
-                <span className="font-medium">{expense.item}</span>
-                <span className="text-purple-600 font-semibold ml-4">
+                <span className="text-lg">{expense.item}</span>
+                <span className="text-purple-600 font-semibold ml-4 text-lg">
                   ₹{expense.amount.toFixed(2)}
                 </span>
               </div>

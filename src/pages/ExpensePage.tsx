@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { MoveRight } from "lucide-react";
+import { MoveRight, ArrowLeft } from "lucide-react";
 import { useSplitz } from "../context/useSplitz";
 import UserBalances from "../components/UserBalances";
 import CurrentExpensePreview from "../components/CurrentExpensePreview";
@@ -33,6 +33,28 @@ export default function ExpensePage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-500 p-4">
       <div className="max-w-7xl mx-auto space-y-6">
+        <div className="flex  justify-between gap-4">
+          <button
+            onClick={() => navigate("/")}
+            className="px-4 py-2 bg-white text-purple-600 rounded-lg hover:bg-purple-100 transition-colors flex items-center gap-2"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            <span className="hidden sm:inline">Back</span>
+          </button>
+          <button
+            onClick={() => navigate("/summary")}
+            disabled={expenses.length === 0}
+            className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
+              expenses.length > 0
+                ? "bg-white text-purple-600 rounded-lg hover:bg-purple-100 cursor-pointer"
+                : "bg-gray-300 cursor-not-allowed"
+            } transition-colors`}
+          >
+            <span className="hidden sm:inline">View Summary</span>
+            <MoveRight className="w-5 h-5" />
+          </button>
+        </div>
+
         <UserBalances />
 
         <div className="grid md:grid-cols-2 gap-6">
@@ -56,21 +78,6 @@ export default function ExpensePage() {
             amount={amount}
           />
         )}
-
-        <div className="flex justify-center">
-          <button
-            onClick={() => navigate("/summary")}
-            disabled={expenses.length === 0}
-            className={`px-8 py-3 rounded-lg flex items-center gap-2 ${
-              expenses.length > 0
-                ? "bg-purple-600 hover:bg-purple-700 cursor-pointer"
-                : "bg-gray-300 cursor-not-allowed"
-            } text-white transition-colors`}
-          >
-            View Summary
-            <MoveRight className="w-5 h-5" />
-          </button>
-        </div>
       </div>
     </div>
   );
