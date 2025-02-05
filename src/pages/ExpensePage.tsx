@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MoveRight, ArrowLeft } from "lucide-react";
-import { useSplitz } from "../context/useSplitz";
+import useSplitz from "../context/useSplitz";
 import UserBalances from "../components/UserBalances";
 import CurrentExpensePreview from "../components/CurrentExpensePreview";
 import ExpenseHistory from "../components/ExpenseHistory";

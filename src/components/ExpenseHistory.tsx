@@ -1,5 +1,5 @@
 import { Pencil, Trash2 } from "lucide-react";
-import { useSplitz } from "../context/useSplitz";
+import useSplitz from "../context/useSplitz";
 import { Expense } from "../Interfaces/Interface";
 
 interface ExpenseHistoryProps {

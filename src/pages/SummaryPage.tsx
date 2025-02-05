@@ -1,12 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, IndianRupee } from "lucide-react";
-import { useSplitz } from "../context/useSplitz";
+import useSplitz from "../context/useSplitz";
 import { getInitials, getRandomColor } from "../utils/utils";
 
 export default function SummaryPage() {
   const { getTotalPerPerson, getTotal } = useSplitz();
   const navigate = useNavigate();
-  const totals = getTotalPerPerson();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center p-4">
@@ -37,12 +36,12 @@ export default function SummaryPage() {
             </div>
             <p className="text-2xl font-bold text-purple-600 mt-2">
               <span aria-label="Indian Rupees">₹</span>
-              {getTotal().toFixed(2)}
+              {getTotal.toFixed(2)}
             </p>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {Object.entries(totals).map(([name, amount]) => (
+            {Object.entries(getTotalPerPerson).map(([name, amount]) => (
               <div key={name} className="bg-gray-50 p-6 rounded-xl space-y-4">
                 <div className="flex items-center gap-3">
                   <div

@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { MoveRight, UserPlus, Users } from "lucide-react";
-import { useSplitz } from "../context/useSplitz";
+import useSplitz from "../context/useSplitz";
 
 export default function LandingPage() {
   const [inputName, setInputName] = useState("");

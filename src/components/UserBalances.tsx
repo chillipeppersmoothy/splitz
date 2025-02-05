@@ -1,11 +1,10 @@
 import { memo } from "react";
 import { IndianRupee } from "lucide-react";
-import { useSplitz } from "../context/useSplitz";
+import useSplitz from "../context/useSplitz";
 import { getInitials, getRandomColor } from "../utils/utils";
 
 const UserBalances = memo(function UserBalances() {
   const { names, getTotalPerPerson, getTotal } = useSplitz();
-  const totals = getTotalPerPerson();
 
   return (
     <div className="bg-white rounded-2xl shadow-xl sm:p-6 p-3">
@@ -35,7 +34,7 @@ const UserBalances = memo(function UserBalances() {
             </div>
             <p className="text-2xl font-bold text-purple-600 mt-2">
               <span aria-label="Indian Rupees">₹</span>
-              {totals[name].toFixed(2)}
+              {getTotalPerPerson[name].toFixed(2)}
             </p>
           </div>
         ))}
@@ -55,7 +54,7 @@ const UserBalances = memo(function UserBalances() {
           </div>
           <p className="text-2xl font-bold text-purple-600 mt-2">
             <span aria-label="Indian Rupees">₹</span>
-            {getTotal().toFixed(2)}
+            {getTotal.toFixed(2)}
           </p>
         </div>
       </div>

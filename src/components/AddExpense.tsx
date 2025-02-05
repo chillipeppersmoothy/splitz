@@ -1,6 +1,6 @@
 import { IndianRupee, Plus, Receipt, Users, X } from "lucide-react";
 import { useRef } from "react";
-import { useSplitz } from "../context/useSplitz";
+import useSplitz from "../context/useSplitz";
 
 interface AddExpenseProps {
   amount: string;
