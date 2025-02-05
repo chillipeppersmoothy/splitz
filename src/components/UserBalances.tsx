@@ -25,7 +25,7 @@ const UserBalances = memo(function UserBalances() {
           >
             <div className="flex items-center gap-3">
               <div
-                className={`w-10 h-10 rounded-full ${getRandomColor()} flex items-center justify-center text-white font-semibold`}
+                className={`h-8 w-8 sm:w-10 sm:h-10 rounded-full ${getRandomColor()} flex items-center justify-center text-white font-semibold`}
               >
                 {getInitials(name)}
               </div>
