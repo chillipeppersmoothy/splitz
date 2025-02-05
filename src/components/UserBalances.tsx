@@ -14,22 +14,24 @@ const UserBalances = memo(function UserBalances() {
         <span>Running Balances</span>
       </h3>
       <div
-        className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-        style={{ minHeight: "100px" }}
+        className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-3 gap-2"
+        style={{ minHeight: "80px" }}
       >
         {names.map((name) => (
           <div
             key={name}
-            className="bg-purple-50 p-4 rounded-lg"
+            className="bg-purple-50 sm:p-4 p-1 rounded-lg"
             style={{ minHeight: "80px" }}
           >
             <div className="flex items-center gap-3">
               <div
-                className={`h-8 w-8 sm:w-10 sm:h-10 rounded-full ${getRandomColor()} flex items-center justify-center text-white font-semibold`}
+                className={`h-7 w-7 sm:w-10 sm:h-10 text-xs sm:text-base rounded-full ${getRandomColor()} flex items-center justify-center text-white font-semibold`}
               >
                 {getInitials(name)}
               </div>
-              <h4 className="font-semibold text-purple-700">{name}</h4>
+              <h4 className="font-semibold text-purple-700 sm:text-base text-sm">
+                {name}
+              </h4>
             </div>
             <p className="text-2xl font-bold text-purple-600 mt-2">
               <span aria-label="Indian Rupees">₹</span>
