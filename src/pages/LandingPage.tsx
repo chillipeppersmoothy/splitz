@@ -50,7 +50,7 @@ export default function LandingPage() {
                 className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
               <button
-                aria-label="Go to Expense"
+                aria-label="Add Names"
                 onClick={handleAddName}
                 className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
               >
@@ -83,6 +83,7 @@ export default function LandingPage() {
 
         <div className="flex items-center justify-center md:justify-end">
           <button
+            aria-label="Go to expenses"
             onClick={() => names.length >= 2 && navigate("/expenses")}
             disabled={names.length < 2}
             className={`p-4 rounded-full ${
