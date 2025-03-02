@@ -25,6 +25,7 @@ export default function LandingPage() {
           <div className="flex gap-2 items-center">
             <img
               src="./splitz.png"
+              alt="Splitz Logo"
               className="w-[50px] h-[50px] sm:w-[70px] sm:h-[70px] rounded-full object-contain"
             />
             <div className="space-y-2">
@@ -49,6 +50,7 @@ export default function LandingPage() {
                 className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
               <button
+                aria-label="Go to Expense"
                 onClick={handleAddName}
                 className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
               >

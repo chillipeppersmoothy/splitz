@@ -41,7 +41,7 @@ const CurrentExpensePreview = ({
           <div key={name} className="bg-purple-50 p-4 rounded-lg">
             <h4 className="font-semibold text-purple-700">{name}</h4>
             <p className="text-2xl font-bold text-purple-600">
-              ₹{splitAmounts[name].toFixed(2)}
+              ₹{splitAmounts[name]?.toFixed(2)}
             </p>
           </div>
         ))}

@@ -1,6 +1,7 @@
 import { IndianRupee, Plus, Receipt, Users, X } from "lucide-react";
-import { useRef } from "react";
+import { SetStateAction, useEffect, useRef, useState } from "react";
 import useSplitz from "../context/useSplitz";
+import { useNavigate } from "react-router-dom";
 
 interface AddExpenseProps {
   amount: string;
@@ -25,9 +26,28 @@ const AddExpense = ({
 }: AddExpenseProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const { names, addExpense, editExpense } = useSplitz();
+  const [error, setError] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!names.length) {
+      navigate("/");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [names.length]);
+
+  const handleItem = (e: { target: { value: SetStateAction<string> } }) => {
+    setError(false);
+    setItem(e.target.value);
+  };
+
+  const handleAmount = (e: { target: { value: SetStateAction<string> } }) => {
+    setError(false);
+    setAmount(e.target.value);
+  };
 
   const handleAddOrUpdateExpense = () => {
-    if (item && amount && selectedNames.length > 0) {
+    if (item.length > 0 && amount.length > 0 && selectedNames.length > 0) {
       const expenseData = {
         item,
         amount: parseFloat(amount),
@@ -49,6 +69,10 @@ const AddExpense = ({
   };
 
   const toggleName = (name: string) => {
+    if (!item.length || !amount.length) {
+      setError(true);
+      return;
+    }
     setSelectedNames((prev) =>
       prev.includes(name) ? prev.filter((n) => n !== name) : [...prev, name]
     );
@@ -79,7 +103,7 @@ const AddExpense = ({
             ref={inputRef}
             type="text"
             value={item}
-            onChange={(e) => setItem(e.target.value)}
+            onChange={(e) => handleItem(e)}
             placeholder="Enter item"
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
           />
@@ -90,7 +114,7 @@ const AddExpense = ({
             <input
               type="number"
               value={amount}
-              onChange={(e) => setAmount(e.target.value)}
+              onChange={(e) => handleAmount(e)}
               placeholder="Enter amount"
               className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
             />
@@ -105,6 +129,7 @@ const AddExpense = ({
               {editingExpenseId ? "Update Expense" : "Add Expense"}
             </button>
             <button
+              aria-label="Select All Users"
               onClick={selectAll}
               className="px-4 py-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 transition-colors"
             >
@@ -113,7 +138,9 @@ const AddExpense = ({
           </div>
         </div>
       </div>
-
+      {error && (
+        <div className="text-red-600 text-sm">Please add an expense.</div>
+      )}
       <div className="space-y-4">
         <h3 className="font-semibold text-gray-700 flex items-center gap-2">
           <Receipt className="w-5 h-5" />

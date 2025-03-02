@@ -36,7 +36,7 @@ export default function SummaryPage() {
             </div>
             <p className="text-2xl font-bold text-purple-600 mt-2">
               <span aria-label="Indian Rupees">₹</span>
-              {getTotal.toFixed(2)}
+              {getTotal?.toFixed(2)}
             </p>
           </div>
 
@@ -54,7 +54,7 @@ export default function SummaryPage() {
                 <div className="flex items-center gap-2">
                   <IndianRupee className="w-5 h-5 text-purple-600" />
                   <p className="text-2xl font-bold text-purple-600">
-                    {amount.toFixed(2)}
+                    {amount?.toFixed(2)}
                   </p>
                 </div>
               </div>

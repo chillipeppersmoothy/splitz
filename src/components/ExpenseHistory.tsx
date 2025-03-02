@@ -19,7 +19,7 @@ const ExpenseHistory = ({ onEditExpense }: ExpenseHistoryProps) => {
               <div className="flex-1">
                 <span className="text-lg">{expense.item}</span>
                 <span className="text-purple-600 font-semibold ml-4 text-lg">
-                  ₹{expense.amount.toFixed(2)}
+                  ₹{expense.amount?.toFixed(2)}
                 </span>
               </div>
               <div className="flex gap-2">
