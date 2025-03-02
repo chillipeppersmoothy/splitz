@@ -3,9 +3,6 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  // optimizeDeps: {
-  //   exclude: ["lucide-react"],
-  // },
   build: {
     rollupOptions: {
       output: {
@@ -17,8 +14,6 @@ export default defineConfig({
     },
     // Optimize chunk size
     chunkSizeWarningLimit: 1000,
-    // Enable source maps for production debugging
-    // sourcemap: true,
     // Minify output
     minify: "terser",
     terserOptions: {
@@ -26,6 +21,16 @@ export default defineConfig({
         drop_console: true,
         drop_debugger: true,
       },
+    },
+  },
+  // Optimize CSS delivery
+  css: {
+    devSourcemap: false,
+  },
+  // Improve asset loading
+  server: {
+    headers: {
+      "Cache-Control": "public, max-age=31536000",
     },
   },
 });
