@@ -16,11 +16,6 @@
             "src": "/splitz-medium.webp",
             "sizes": "70x70",
             "type": "image/png"
-        },
-        {
-            "src": "/splitz.webp",
-            "sizes": "192x192",
-            "type": "image/png"
         }
     ]
 }
